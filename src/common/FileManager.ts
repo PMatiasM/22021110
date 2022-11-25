@@ -13,7 +13,7 @@ import { GridFSBucket, ObjectId } from "mongodb";
 
 class FileManager {
   private directory: string;
-  private buckets: Array<string> = ["images", "videos"];
+  private buckets: Array<string> = ["icons", "images", "videos"];
 
   constructor() {
     this.directory = join(__dirname, "..", "..", "temp");
@@ -83,7 +83,9 @@ class FileManager {
         const streamGridFS = bucket.openDownloadStream(_id);
         const path = join(
           this.directory,
-          `${parse(file.filename).name}_${_id.toString()}${
+          `${
+            parse(file.filename).name
+          }_${_id.toString()}_${new Date().getTime()}${
             parse(file.filename).ext
           }`
         );

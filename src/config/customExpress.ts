@@ -11,11 +11,12 @@ export default () => {
   app.use(express.json());
   app.use(fileUpload());
   app.use(apiRules);
-  router(app);
 
   app.get("/01112022", (req, res, next) =>
     res.status(200).json({ message: "Best day of my life" })
   );
+
+  router(app);
 
   return app;
 };

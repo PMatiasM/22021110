@@ -2,7 +2,7 @@ import mongoose, { Document, ObjectId, Schema } from "mongoose";
 import mongooseUniqueValidator from "mongoose-unique-validator";
 
 export interface IIcon {
-  name: string;
+  file: ObjectId;
   size: Array<number>;
 }
 
@@ -28,7 +28,7 @@ const PlaceSchema: Schema = new Schema(
     position: [Number],
     icon: {
       type: {
-        name: String,
+        file: Schema.Types.ObjectId,
         size: [Number],
       },
       required: true,

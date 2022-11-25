@@ -25,7 +25,9 @@ export const schemas = {
         .items(Joi.number().required())
         .required(),
       icon: Joi.object({
-        name: Joi.string().required(),
+        file: Joi.string()
+          .regex(/^[0-9a-fA-F]{24}$/)
+          .required(),
         size: Joi.array()
           .min(2)
           .max(2)
