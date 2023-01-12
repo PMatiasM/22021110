@@ -3,11 +3,15 @@ import Logging from "../library/Logging";
 
 const requestLogger = (req: Request, res: Response, next: NextFunction) => {
   Logging.info(
-    `Incomming -> Method: [${req.method}] - Url: [${req.url}] - Ip: [${req.socket.remoteAddress}]`
+    `Incomming -> Method: [${req.method}] - Url: [${req.url}] - Ip: [${
+      req.ip || req.socket.remoteAddress
+    }]`
   );
   res.on("finish", () => {
     Logging.info(
-      `Outgoing -> Method: [${req.method}] - Url: [${req.url}] - Ip: [${req.socket.remoteAddress}] Status: [${res.statusCode}]`
+      `Outgoing -> Method: [${req.method}] - Url: [${req.url}] - Ip: [${
+        req.ip || req.socket.remoteAddress
+      }] Status: [${res.statusCode}]`
     );
   });
 

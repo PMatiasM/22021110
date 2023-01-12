@@ -6,6 +6,7 @@ import fileUpload from "express-fileupload";
 
 export default () => {
   const app = express();
+  app.set("trust proxy", true);
   app.use(requestLogger);
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
