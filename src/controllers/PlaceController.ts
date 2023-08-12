@@ -6,7 +6,7 @@ class PlaceController {
     const place = new Place(req.body);
     const exists = await Place.findOne({ name: place.name });
     if (exists) {
-      return res.status(200).json(exists);
+      return res.status(409).json({ message: `"${place.name}" já existe` });
     }
     return place
       .save()
@@ -20,7 +20,13 @@ class PlaceController {
 
   async getPlace(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
-    return Place.findById(id, { "icon._id": 0 })
+    return Place.findById(id)
+      .populate([
+        {
+          path: "icon",
+          select: "-_id -createdAt -updatedAt -__v ",
+        },
+      ])
       .select("-createdAt -updatedAt -__v")
       .then((place) => {
         res.status(place ? 200 : 404).json(
@@ -35,7 +41,13 @@ class PlaceController {
   }
 
   async getPlaces(req: Request, res: Response, next: NextFunction) {
-    return Place.find({}, { "icon._id": 0 })
+    return Place.find({})
+      .populate([
+        {
+          path: "icon",
+          select: "-_id -createdAt -updatedAt -__v ",
+        },
+      ])
       .select("-createdAt -updatedAt -__v")
       .then((places) => {
         res.status(200).json(places);

@@ -3,7 +3,7 @@ dotenv.config();
 
 const MONGO_DATABASE = process.env.MONGO_DATABASE || "";
 const MONGO_URL = process.env.MONGO_URL || "";
-const SERVER_PORT = process.env.SERVER_PORT ?? "3141";
+const SERVER_PORT = process.env.SERVER_PORT ?? "3000";
 
 export const config = {
   mongo: {

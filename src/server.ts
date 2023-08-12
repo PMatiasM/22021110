@@ -19,5 +19,5 @@ mongoose
   .catch((error) => {
     Logging.error("Unable to connect: ");
     Logging.error(error);
-    process.exit();
+    process.exit(1);
   });

@@ -1,15 +1,10 @@
 import mongoose, { Document, ObjectId, Schema } from "mongoose";
 import mongooseUniqueValidator from "mongoose-unique-validator";
 
-export interface IIcon {
-  file: ObjectId;
-  size: Array<number>;
-}
-
 export interface IPlace {
   name: string;
   position: Array<number>;
-  icon: IIcon;
+  icon: ObjectId;
   images: Array<ObjectId>;
   videos: Array<ObjectId>;
   title: string;
@@ -27,11 +22,9 @@ const PlaceSchema: Schema = new Schema(
     name: { type: String, required: true, unique: true },
     position: [Number],
     icon: {
-      type: {
-        file: Schema.Types.ObjectId,
-        size: [Number],
-      },
+      type: Schema.Types.ObjectId,
       required: true,
+      ref: "icons"
     },
     images: {
       type: [Schema.Types.ObjectId],
